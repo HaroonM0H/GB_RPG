@@ -19,7 +19,9 @@ public:
 		m_velocity = direction;
 	}
 
-	
+	void update(float deltaTime) {
+		m_sprite.move(m_velocity * m_speed * deltaTime);
+	}
 
 	void draw(sf::RenderWindow& window) const {
 		window.draw(m_sprite);
