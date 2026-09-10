@@ -1,20 +1,29 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Player.h"
 
 int main()
 {
     unsigned int width = 640;
     unsigned int height = 360;
 
-    sf::RenderWindow window(sf::VideoMode({ width, height }), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode({ width, height }), "GBgame");
     window.setFramerateLimit(60);
 
-    sf::Texture texture("Assets/SpriteSheet.png");
-    sf::Sprite sprite(texture, sf::IntRect({ 0,0 }, {16, 16}));
-    //sprite.setColor(sf::Color(255, 255, 255, 128)); // half transparent
-    sprite.setOrigin({ 8.0f, 8.0f });
-    sprite.setPosition({ 320.f, 180.f });
-    sprite.setScale({3.0f,  3.0f});
+    //assign player texture
+    sf::Texture texture;
+    try
+    {
+        texture = sf::Texture("Assets/SpriteSheet.png");
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Failed to load texture: " << e.what() << '\n';
+        return -1;
+    }
+    Player player(texture, { width / 2.f, height / 2.f });
+
+    sf::Clock clock; // setting up deltaTime
 
     //sf::CircleShape circle(200.0f);
     //circle.setOrigin(circle.getGeometricCenter());
@@ -23,6 +32,7 @@ int main()
 
         while (window.isOpen())
         {
+            float deltaTime = clock.restart().asSeconds();
             //UserEvents, like close window,  escape and any other inputs 
             while (const std::optional event = window.pollEvent())
             {
@@ -30,22 +40,20 @@ int main()
                     window.close();
                 }
                 else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
-
                     if (keyPressed->scancode == sf::Keyboard::Scancode::Escape) {
                         window.close();
                     }
-
                 }
-
-
             }
+
+            player.handleInput();
+            player.update(deltaTime);
 
             //render
             window.clear(sf::Color::Black);
 
             //Drawing
-            //window.draw(circle);
-            window.draw(sprite);
+            player.draw(window);
             window.display();
         }
 }
