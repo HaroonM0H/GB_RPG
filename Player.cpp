@@ -13,10 +13,21 @@ void Player::handleInput()
 {
     sf::Vector2f direction{ 0.f, 0.f };
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W)) direction.y -= 1.f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::S)) direction.y += 1.f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A)) direction.x -= 1.f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D)) direction.x += 1.f;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W))
+        direction.y -= 1.f;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::S)) 
+        direction.y += 1.f;
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A)) {
+        direction.x -= 1.f;
+        m_sprite.setTextureRect(sf::IntRect({ 32,0 }, { 16,16 }));
+    }
+        
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))
+        direction.x += 1.f;
+
+
+
 
     m_velocity = direction;
 }
@@ -24,6 +35,7 @@ void Player::handleInput()
 void Player::update(float deltaTime)
 {
     m_sprite.move(m_velocity * m_speed * deltaTime);
+
 }
 
 void Player::draw(sf::RenderWindow& window) const

@@ -1,6 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+enum playerState {
+    DOWN = 0, UP = 1, LEFT = 2, RIGHT = 3
+};
+
 class Player
 {
 public:
