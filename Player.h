@@ -1,8 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+
+
+enum playerDirection {
+    DOWN, UP, LEFT, RIGHT
+};
 enum playerState {
-    DOWN = 0, UP = 1, LEFT = 2, RIGHT = 3
+    IDLE, WALKING
 };
 
 class Player
@@ -17,4 +22,9 @@ private:
     sf::Sprite   m_sprite;
     sf::Vector2f m_velocity{ 0.f, 0.f };
     float        m_speed = 150.f;
+    playerDirection currentDirection;
+    playerState currentState;
+    float timer = 0.0f;
+    float timerMax = 1.0f;
+    int texHeight = 128;
 };
