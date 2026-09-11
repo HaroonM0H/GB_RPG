@@ -20,28 +20,28 @@ void Player::handleInput()
         direction.y -= 1.f;
         currentDirection = UP;
         currentState = WALKING;
-        m_sprite.setTextureRect(sf::IntRect({ 32,0 }, { 32, 32 }));
+        //m_sprite.setTextureRect(sf::IntRect({ 32,0 }, { 32, 32 }));
     }
     
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::S)) {
         direction.y += 1.f;
         currentDirection = DOWN;
         currentState = WALKING;
-        m_sprite.setTextureRect(sf::IntRect({ 0,0 }, { 32, 32 }));
+
     }
         
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A)) {
         direction.x -= 1.f;
         currentDirection = LEFT;
         currentState = WALKING;
-        m_sprite.setTextureRect(sf::IntRect({ 64,0 }, { 32, 32 }));
+        //m_sprite.setTextureRect(sf::IntRect({ 64,0 }, { 32, 32 }));
     }
         
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))  {
         direction.x += 1.f;       
         currentDirection = RIGHT;
         currentState = WALKING;
-        m_sprite.setTextureRect(sf::IntRect({ 96,0 }, { 32, 32 }));
+        //m_sprite.setTextureRect(sf::IntRect({ 96,0 }, { 32, 32 }));
         
     }
     if (direction.x == 0.f && direction.y == 0.f) {
@@ -55,20 +55,37 @@ void Player::update(float deltaTime)
 {
     m_sprite.move(m_velocity * m_speed * deltaTime);
 
+
     timer += deltaTime;
-    switch(currentDirection){
-    case DOWN:
-        if (texHeight >= 256){
-            texHeight = 128;
-        }
-        if (timer >= timerMax) {
-            texHeight += 32;
-            m_sprite.setTextureRect(sf::IntRect({ 0,texHeight }, { 32, 32 }));
 
-            timer = 0.0f;
-        }
+    int column = (int)currentDirection;
+    currentFrame = (currentFrame + 1) % 4;
 
+    if (timer >= timerMax) {
+        m_sprite.setTextureRect(sf::IntRect({ column * 32,currentFrame * 32 }, { 32,32 }));
+        timer = 0;
     }
+    
+
+    //switch (currentDirection) {
+    //case LEFT:
+    //    texHeight = 128;
+    //    for (currentFrame = 0; currentFrame <= 4; currentFrame++) {
+    //        if (texHeight >= 256)
+    //        if (timer >= timerMax) {
+    //            m_sprite.setTextureRect(sf::IntRect({ 0,texHeight * currentFrame }, { 32,32 }));
+    //        }
+    //    }
+    //    break;
+    //case RIGHT:
+    //    break;
+    //case UP:
+    //    break;
+    //case DOWN:
+    //    break;
+    //default:
+    //    break;
+    //}
 
 }
 

@@ -1,10 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-
-
 enum playerDirection {
-    DOWN, UP, LEFT, RIGHT
+    DOWN = 0, UP = 1, LEFT = 2, RIGHT = 3
 };
 enum playerState {
     IDLE, WALKING
@@ -25,6 +23,8 @@ private:
     playerDirection currentDirection;
     playerState currentState;
     float timer = 0.0f;
-    float timerMax = 1.0f;
-    int texHeight = 128;
+    float timerMax = 0.25f;
+    int texHeight = 0;
+    int currentFrame = 0;
+    
 };
