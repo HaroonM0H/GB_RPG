@@ -1,11 +1,15 @@
+//#define DEBUG
+
+
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include <iostream>
 
 Player::Player(const sf::Texture& texture, sf::Vector2f startPos)
     : m_sprite(texture, sf::IntRect({ 0, 0 }, { 32, 32 }))
-    ,currentDirection(DOWN)
-    ,currentState(IDLE)
+    , currentDirection(DOWN)
+    , currentState(IDLE)
+    
 {
     m_sprite.setPosition(startPos);
     m_sprite.setOrigin({ 16.0f, 16.0f });
@@ -59,33 +63,26 @@ void Player::update(float deltaTime)
     timer += deltaTime;
 
     int column = (int)currentDirection;
-    currentFrame = (currentFrame + 1) % 4;
+
+    // State determines which section of the spritesheet
+    int row = currentFrame;
+
+    if (currentState == WALKING)
+    {
+        row += 4;
+    }
 
     if (timer >= timerMax) {
+        currentFrame = (currentFrame + 1) % 4;
+
+        #ifdef DEBUG
+        std::cout << currentFrame;
+        #endif // DEBUG
+        
         m_sprite.setTextureRect(sf::IntRect({ column * 32,currentFrame * 32 }, { 32,32 }));
-        timer = 0;
+        timer -= timerMax;
     }
     
-
-    //switch (currentDirection) {
-    //case LEFT:
-    //    texHeight = 128;
-    //    for (currentFrame = 0; currentFrame <= 4; currentFrame++) {
-    //        if (texHeight >= 256)
-    //        if (timer >= timerMax) {
-    //            m_sprite.setTextureRect(sf::IntRect({ 0,texHeight * currentFrame }, { 32,32 }));
-    //        }
-    //    }
-    //    break;
-    //case RIGHT:
-    //    break;
-    //case UP:
-    //    break;
-    //case DOWN:
-    //    break;
-    //default:
-    //    break;
-    //}
 
 }
 
