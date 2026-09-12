@@ -24,7 +24,7 @@ private:
     playerState currentState;
     float timer = 0.0f;
     float timerMax = 0.25f;
-    int startingFrame = 0;
+    //int startingFrame = 0;
     int currentFrame = 0;
     
     

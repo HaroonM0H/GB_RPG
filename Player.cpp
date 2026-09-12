@@ -22,27 +22,25 @@ void Player::handleInput()
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::W))  {
         direction.y -= 1.f;
+        direction.x = 0;
         currentDirection = UP;
         currentState = WALKING;
         //m_sprite.setTextureRect(sf::IntRect({ 32,0 }, { 32, 32 }));
-    }
-    
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::S)) {
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::S)) {
         direction.y += 1.f;
+        direction.x = 0;
         currentDirection = DOWN;
         currentState = WALKING;
 
-    }
-        
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A)) {
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A)) {
         direction.x -= 1.f;
+        direction.y = 0;
         currentDirection = LEFT;
         currentState = WALKING;
         //m_sprite.setTextureRect(sf::IntRect({ 64,0 }, { 32, 32 }));
-    }
-        
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))  {
-        direction.x += 1.f;       
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))  {
+        direction.x += 1.f;
+        direction.y = 0;
         currentDirection = RIGHT;
         currentState = WALKING;
         //m_sprite.setTextureRect(sf::IntRect({ 96,0 }, { 32, 32 }));
@@ -73,17 +71,15 @@ void Player::update(float deltaTime)
     }
 
     if (timer >= timerMax) {
+        timer -= timerMax;
         currentFrame = (currentFrame + 1) % 4;
 
         #ifdef DEBUG
         std::cout << currentFrame;
         #endif // DEBUG
-        
-        m_sprite.setTextureRect(sf::IntRect({ column * 32,currentFrame * 32 }, { 32,32 }));
-        timer -= timerMax;
     }
     
-
+    m_sprite.setTextureRect(sf::IntRect({ column * 32,row * 32 }, { 32,32 }));
 }
 
 void Player::draw(sf::RenderWindow& window) const
