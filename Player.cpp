@@ -1,6 +1,6 @@
 //#define DEBUG
 
-
+#include <stack>
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include <iostream>
@@ -25,25 +25,24 @@ void Player::handleInput()
         direction.x = 0;
         currentDirection = UP;
         currentState = WALKING;
-        //m_sprite.setTextureRect(sf::IntRect({ 32,0 }, { 32, 32 }));
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::S)) {
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::S)) {
         direction.y += 1.f;
         direction.x = 0;
         currentDirection = DOWN;
         currentState = WALKING;
-
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A)) {
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A)) {
         direction.x -= 1.f;
         direction.y = 0;
         currentDirection = LEFT;
         currentState = WALKING;
-        //m_sprite.setTextureRect(sf::IntRect({ 64,0 }, { 32, 32 }));
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))  {
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::D))  {
         direction.x += 1.f;
         direction.y = 0;
         currentDirection = RIGHT;
         currentState = WALKING;
-        //m_sprite.setTextureRect(sf::IntRect({ 96,0 }, { 32, 32 }));
         
     }
     if (direction.x == 0.f && direction.y == 0.f) {

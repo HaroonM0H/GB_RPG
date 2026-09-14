@@ -1,6 +1,8 @@
+//#define DEBUG
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Map.h"
 
 int main()
 {
@@ -11,17 +13,33 @@ int main()
     window.setFramerateLimit(60);
 
     //assign player texture
-    sf::Texture texture;
+    sf::Texture playerTexture;
     try
     {
-        texture = sf::Texture("Assets/SpriteSheet.png");
+        playerTexture = sf::Texture("Assets/SpriteSheet.png");
     }
     catch (const std::exception& e)
     {
         std::cerr << "Failed to load texture: " << e.what() << '\n';
         return -1;
     }
-    Player player(texture, { width / 2.f, height / 2.f });
+    Player player(playerTexture, { width / 2.f, height / 2.f });
+
+    //assign map texture
+    sf::Texture mapTexture;
+
+    try
+    {
+        mapTexture = sf::Texture("Assets/TilesetField.png");
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Failed to load texture: " << e.what() << '\n';
+        return -1;
+    }
+    Map Map(mapTexture, { width / 2.f, height / 2.f });
+
+
 
     sf::Clock clock; // setting up deltaTime
 
@@ -45,9 +63,10 @@ int main()
                     }
                 }
             }
-
+            Map.update();
             player.handleInput();
             player.update(deltaTime);
+
 
             //render
             window.clear(sf::Color::Black);
