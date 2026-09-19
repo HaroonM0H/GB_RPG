@@ -8,4 +8,5 @@ public:
 	void draw(sf::RenderWindow& window) const;
 private:
 	sf::Sprite m_Map;
+	//int tiles[][];
 };

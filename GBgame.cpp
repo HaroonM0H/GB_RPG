@@ -63,7 +63,7 @@ int main()
                     }
                 }
             }
-            Map.update();
+            //Map.update();
             player.handleInput();
             player.update(deltaTime);
 
@@ -72,6 +72,7 @@ int main()
             window.clear(sf::Color::Black);
 
             //Drawing
+            Map.draw(window);
             player.draw(window);
             window.display();
         }
