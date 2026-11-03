@@ -9,4 +9,5 @@ public:
 private:
 	sf::Sprite m_Map;
 	//int tiles[][];
+	int textureTiles[];
 };
