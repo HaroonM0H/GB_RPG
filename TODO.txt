@@ -1,0 +1,14 @@
+
+
+TODO:
+ - Render level fully as one giant texture pulling sprite from spritesheet. 
+ - once rendered draw out map with a number represnting each tile on the sprite sheet.
+    1 0 2 2 0 1 1 1
+    1 1 2 2 2 0 0 1
+    1 1 1 2 2 1 0 1 with each number being a different thing, like 1 = tree, 2 = plains ect
+
+ - build out a simple level.
+
+ - add in player interactions. attack, interact, ect.
+
+ - add in an npc or add an interactive object such as chest.
