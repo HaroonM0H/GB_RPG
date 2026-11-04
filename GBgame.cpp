@@ -30,7 +30,7 @@ int main()
 
     try
     {
-        mapTexture = sf::Texture("Assets/TilesetField.png");
+        mapTexture = sf::Texture("Assets/TilesetFloor.png");
     }
     catch (const std::exception& e)
     {

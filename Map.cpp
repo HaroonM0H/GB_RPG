@@ -5,19 +5,23 @@
 
 Map::Map(const sf::Texture& texture, sf::Vector2f startPos)
 {
-	int tileHeight = 24;
-	int tileWidth = 24;
+	int tileHeight = 32;
+	int tileWidth = 32;
 
-	int columns = texture.getSize().x / tileHeight;
-	int rows = texture.getSize().y / tileWidth;
+	//level dimensions
+	int columns = 2;
+	int rows = 3;
+
+	int tilesetColumns = texture.getSize().x / tileWidth;
+
 
 	for (int row = 0; row < rows; row++) {
 		for (int column = 0; column < columns; column++) {
 
 			int tileID = textureTiles[row][column];
 
-			int textureColumn = tileID % 2;
-			int textureRow = tileID / 2;
+			int textureColumn = tileID % tilesetColumns;
+			int textureRow = tileID / tilesetColumns;
 
 			sf::IntRect textureRect(
 				{ textureColumn * tileWidth, textureRow * tileHeight },
