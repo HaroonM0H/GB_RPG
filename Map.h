@@ -9,10 +9,9 @@ public:
 private:
 	std::vector<sf::Sprite> m_Map; //changed to array better for tileset
 	
-	int textureTiles[3][3] = {
-		{0, 2, 3},
-		{0, 2, 3},
-		{2, 3, 2}
+	int textureTiles[2][2] = {
+		{0, 1},
+		{2, 3}
 	};
 	
 };
