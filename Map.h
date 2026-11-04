@@ -7,7 +7,12 @@ public:
 	void update();
 	void draw(sf::RenderWindow& window) const;
 private:
-	sf::Sprite m_Map;
-	//int tiles[][];
-	int textureTiles[];
+	std::vector<sf::Sprite> m_Map; //changed to array better for tileset
+	
+	int textureTiles[3][3] = {
+		{0, 2, 3},
+		{0, 2, 3},
+		{2, 3, 2}
+	};
+	
 };
